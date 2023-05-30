@@ -25,3 +25,29 @@
 #container a {
   text-decoration: none;
 }
+
+//home.page.scss
+#slcContainer {
+  width: 80vw;
+  margin: 0 auto;
+  margin-top: 16px;
+}
+
+.titleSelect {
+  margin: 10px 0px;
+}
+
+.listRates {
+  display: flex;
+  padding: 10px;
+  width: 100%;
+  .ratesFlag {
+      img {
+          height: 20px;
+      }
+  }
+}
+
+#searchCurr {
+  padding-top: 0px;
+}

@@ -15,6 +15,8 @@ export class HomePage {
   convData: any = [];
   ratesData: any = [];
   curAmount: any = '1.00';
+  crcTerm: any;
+  filterCur: any;
 
   constructor(
     private dataServer: DataService,

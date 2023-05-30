@@ -23,7 +23,9 @@
         <ion-col size="12" size-md>
             <div class="titleSelect">Select Currency</div>
             <div style="display: flex;">
-                <ion-searchbar showClearButton="never" (ionFocus)="isOpen=true" id="searchCurr" placeholder=" Select a currency" value="{{seleCur}}"></ion-searchbar>
+                <ion-searchbar showClearButton="never" (ionFocus)="isOpen=true" id="searchCurr" placeholder=" Select a currency" value="{{seleCur}}">
+                    <img onerror="this.src='../../assets/flags/wallet.png'" style="height:20px;margin-right: 10px;" src="../../assets/flags/{{codeCur | lowercase}}.png" alt="flags">
+                </ion-searchbar>
             </div>
         </ion-col>
     </ion-row>
@@ -39,12 +41,13 @@
                 </ion-toolbar>
             </ion-header>
             <ion-content>
+                <ion-searchbar placeholder=" Filter currency" [(ngModel)]="filterCur"></ion-searchbar>
                 <ion-list>
                     <ion-radio-group (ionChange)="selectedCur($event)" value="USD">
                         <ion-list-header>
                             <ion-label>Name</ion-label>
                         </ion-list-header>
-                        <ion-item *ngFor="let i of symbols">
+                        <ion-item *ngFor="let i of symbols | filter : filterCur">
                             <ion-label>{{i.code}} - {{i.desc}}</ion-label>
                             <ion-radio slot="start" value="{{i.code}}|{{i.desc}}"></ion-radio>
                         </ion-item>
@@ -53,9 +56,15 @@
             </ion-content>
         </ng-template>
     </ion-modal>
+    <div *ngIf="convData.length > 0">
+        <ion-searchbar placeholder="Filter Currency" [(ngModel)]="crcTerm"></ion-searchbar>
+    </div>
     <div>
-        <ion-card *ngFor="let d of convData">
+        <ion-card *ngFor="let d of convData | filter : crcTerm">
             <div class="listRates">
+                <div class="ratesFlag">
+                    <img style="margin-right: 10px;" src="../../assets/flags/{{d.name | lowercase}}.png" alt="flags" onerror="this.src='../../assets/flags/wallet.png'">
+                </div>
                 <div class="ratesDetails">
                     <ion-card-subtitle>
                         {{d.name}} - {{d.desc}}
